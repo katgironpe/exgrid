@@ -164,5 +164,5 @@ You can even get aggregate stats
 You must supply your credentials as environment vars to run tests.
 
 ```bash
-API_KEY="secret" API_USER="foo@example.com" mix test test
+API_KEY="secret" API_USER="foo@example.com" mix test
 ```

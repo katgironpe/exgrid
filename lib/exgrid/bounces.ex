@@ -16,7 +16,7 @@ defmodule ExGrid.Bounces do
 
   @doc """
   get bounces with optional parameters
-  
+
   * see [sendgrid api docs](https://sendgrid.com/docs/API_Reference/Web_API/bounces.html)
 
   * note for `start_date` and `end_date` they must be in `YYYY-M-D` string format
@@ -26,7 +26,7 @@ defmodule ExGrid.Bounces do
   iex> ExGrid.Bounces.get(credentials, %{start_date: "2014-7-10", end_date: "2014-7-20"})\r\n
   iex> ExGrid.Bounces.get(credentials, %{date: "1"})\r\n
   iex> ExGrid.Bounces.get(credentials, %{date: 1, limit: 1})\r\n
-  
+
   """
   def get(credentials, %{start_date: start_date, end_date: end_date}) do
     {:ok, sdate} = parse_date(start_date)
@@ -38,8 +38,8 @@ defmodule ExGrid.Bounces do
       0 ->
         {:error, "Dates are the same"}
       1 ->
-        {:error, "Start date is older than end date"}   
-    end   
+        {:error, "Start date is older than end date"}
+    end
   end
 
   def get(credentials, %{start_date: _start_date}=sdate) do
@@ -47,8 +47,8 @@ defmodule ExGrid.Bounces do
       {:ok, _start_date} = parse_date(sdate.start_date) ->
         {_code, _body} = HTTPHandler.get(credentials, build_url("bounces", "get", credentials, sdate))
       {:error, _start_date} =  parse_date(sdate.start_date) ->
-        {:error, "Start date is older than end date"}   
-    end 
+        {:error, "Start date is older than end date"}
+    end
   end
 
   def get(credentials, optional_parameters) when is_map(optional_parameters) do
